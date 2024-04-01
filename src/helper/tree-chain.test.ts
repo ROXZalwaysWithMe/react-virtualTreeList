@@ -123,6 +123,11 @@ describe("test tree chain node", () => {
 		expect(treeChainNode2.level).toBe(0);
 		expect(treeChainNode2.tail.level).toBe(0);
 	});
+
+	test("node size", () => {
+		expect(treeChainNode1.nodeSize).toBe(10);
+		expect(treeChainNode2.nodeSize).toBe(1);
+	});
 });
 
 describe("test tree chain", () => {
@@ -198,6 +203,14 @@ describe("test tree chain", () => {
 			idSet.delete(Number(node.key));
 		});
 		expect(idSet.size).toBe(0);
+	});
+
+	test("tree chain top nodes", () => {
+		expect(treeChain.topLevelNodes.length).toBe(3);
+	});
+
+	test("tree chain length", () => {
+		expect(treeChain.chainLength).toBe(14);
 	});
 });
 

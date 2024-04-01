@@ -105,6 +105,14 @@ export class TreeChainNode<Data extends CommonObject> {
 		return num;
 	}
 
+	get nodeSize() {
+		let size = 1;
+		this.each((node) => {
+			size += node.childNodes.length;
+		});
+		return size;
+	}
+
 	constructor(public data: Data | null = null, keyName: PropertyKey = "id") {
 		if (!data) return;
 		if (!isPropertyKey(keyName)) {
@@ -403,6 +411,11 @@ export class TreeChain<Data extends CommonObject> {
 		this._topLevelNodes.length = 0;
 		this._topLevelNodes.push(...this.getNodesByLevel());
 		return this._topLevelNodes;
+	}
+
+	get chainLength() {
+		if (this._chain === null) return 0;
+		return this.topLevelNodes.reduce((acc, cur) => acc + cur.nodeSize, 0);
 	}
 
 	constructor(protected _chain: TreeChainNode<Data> | null) {}
